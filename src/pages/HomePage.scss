@@ -1,0 +1,28 @@
+.HomePage {
+  margin: 0 auto;
+  // width: 80%;
+  background-color: #fff;
+  min-height: 100vh;
+  // .adm-selector-item{
+  //   // min-width: 60px;
+  //   width: 25vw;
+  // }
+  .author{
+    text-align: center;
+  }
+  .main-title{
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 8px;
+  }
+
+  .result-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .copy-button{
+      color: lightblue;
+    }
+  }
+}
