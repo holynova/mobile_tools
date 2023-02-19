@@ -9,7 +9,7 @@
     "makeDict": "bash makeDict.bash"
   },
   "dependencies": {
-    "antd-mobile": "^5.0.0-rc.2",
+    "antd-mobile": "^5.28.0",
     "pinyin-pro": "^3.3.1",
     "react": "^17.0.0",
     "react-copy-to-clipboard": "^5.0.4",
