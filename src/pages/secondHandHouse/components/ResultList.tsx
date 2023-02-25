@@ -7,7 +7,7 @@ import React, {
   useMemo,
 } from "react";
 import { isValidArray } from "../../../common/utils";
-import { PriceNode } from "../utils/SecondHandHouseCalculator";
+import { PriceNode } from "../model/SecondHandHouseCalculator";
 // import './ResultList.less'
 // import  {log} from ''
 interface Props {
@@ -55,7 +55,7 @@ const ResultList: React.FC<Props> = (props) => {
           }
           return (
             <List.Item key={x.name} extra={`${x.result}万`} description={desc}>
-              <span>{`${"----".repeat(x.level * 2)}${x.name}`}</span>
+              <span>{`${"--".repeat(x.level * 1)}${x.name}`}</span>
             </List.Item>
           );
         })}

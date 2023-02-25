@@ -21,7 +21,7 @@ import {
   HouseCalculator,
   Params,
   PriceNode,
-} from "./utils/SecondHandHouseCalculator";
+} from "./model/SecondHandHouseCalculator";
 import { isValidArray } from "../../common/utils";
 import ResultTree from "./components/ResultTree";
 import "./SecondHandHouse.scss";
@@ -31,7 +31,7 @@ import ResultList from "./components/ResultList";
 interface Props {}
 const c = new HouseCalculator();
 const initialValue: Params = {
-  totalPrice: 450,
+  totalPrice: 444,
   tradeCenterVerifiedPrice: 400,
   isOverFiveYears: true,
   isSellersOnlyHouse: false,

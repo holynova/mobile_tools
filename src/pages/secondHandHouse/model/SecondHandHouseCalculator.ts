@@ -1,3 +1,5 @@
+import currency from "currency.js";
+
 export interface Params {
   totalPrice: number;
   tradeCenterVerifiedPrice: number; // 交易中心核验价格
@@ -66,10 +68,16 @@ export class HouseCalculator {
     this.downPaymentPercentage = input.downPaymentPercentage;
   }
 
+  getResult(base: number, rate: number) {
+    return currency(base ?? 0)
+      .multiply(rate ?? 0)
+      .divide(100).value; //.format();
+  }
+
   getAgencyFee(): Result {
     const base = this.totalPrice;
     const rate = this.agencyFeeRate ?? 2;
-    return { base, rate, result: (base * rate) / 100 };
+    return { base, rate, result: this.getResult(base, rate) };
   }
   // 契税
   getDeedTax(): Result {
@@ -80,7 +88,7 @@ export class HouseCalculator {
     } else {
       rate = 3;
     }
-    return { base, rate, result: (base * rate) / 100 };
+    return { base, rate, result: this.getResult(base, rate) };
   }
   // 增值税
   getValueAddedTax(): Result {
@@ -98,7 +106,7 @@ export class HouseCalculator {
         ? (this.tradeCenterVerifiedPrice - this.buyPrice) / 1.05
         : this.tradeCenterVerifiedPrice / 1.05;
     }
-    return { base, rate, result: (base * rate) / 100 };
+    return { base, rate, result: this.getResult(base, rate) };
   }
   // 个人所得税
   getPersonalInputTax(): Result {
@@ -127,21 +135,21 @@ export class HouseCalculator {
       "1110": { base, rate: 1 },
       "1111": { base, rate: 0 },
     };
-
-    const rate = dict[key].rate;
-    return { base, rate, result: (base * rate) / 100 };
+    type TKey = keyof typeof dict;
+    const rate = dict[key as TKey].rate;
+    return { base, rate, result: this.getResult(base, rate) };
   }
   // 首付
   getDownPayment(): Result {
     const base = this.tradeCenterVerifiedPrice;
     const rate = this.downPaymentPercentage;
-    return { base, rate, result: (base * rate) / 100 };
+    return { base, rate, result: this.getResult(base, rate) };
   }
   //贷款总额
   getTotalLoan(): Result {
     const rate = 100 - this.downPaymentPercentage;
     const base = this.tradeCenterVerifiedPrice;
-    return { base, rate, result: (base * rate) / 100 };
+    return { base, rate, result: this.getResult(base, rate) };
   }
 
   autoSum(input: PriceNode): PriceNode {

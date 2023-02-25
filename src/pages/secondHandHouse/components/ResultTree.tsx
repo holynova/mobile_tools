@@ -12,7 +12,7 @@ import {
   G6TreeGraphData,
   TreeGraphData,
 } from "@ant-design/graphs";
-import { PriceNode } from "../utils/SecondHandHouseCalculator";
+import { PriceNode } from "../model/SecondHandHouseCalculator";
 
 // import './ResultTree.less'
 // import  {log} from ''
