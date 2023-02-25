@@ -25,6 +25,7 @@ import {
 import { isValidArray } from "../../common/utils";
 import ResultTree from "./components/ResultTree";
 import "./SecondHandHouse.scss";
+import ResultList from "./components/ResultList";
 // import  {log} from ''
 
 interface Props {}
@@ -133,49 +134,6 @@ const SecondHandHouse: React.FC<Props> = (props) => {
     );
   }, []);
 
-  const renderResultPart = useCallback(() => {
-    interface Row extends PriceNode {
-      level: number;
-    }
-    const flat = (input?: PriceNode): Row[] => {
-      const res: Row[] = [];
-      const loop = (node: PriceNode, level: number) => {
-        if (node) {
-          res.push({
-            name: node.name,
-            base: node?.base,
-            rate: node?.rate,
-            result: node.result,
-            level,
-          });
-          if (isValidArray(node.children)) {
-            node.children?.forEach((child) => {
-              loop(child, level + 1);
-            });
-          }
-        }
-      };
-      loop(input, 0);
-      return res;
-    };
-    let res = flat(result);
-    return (
-      <List>
-        {res.map((x) => {
-          let desc = `${x.base}万 x ${x.rate}% = ${x.result}万`;
-          if (typeof x.base === "undefined" || typeof x.rate === "undefined") {
-            desc = "";
-          }
-          return (
-            <List.Item key={x.name} extra={x.result} description={desc}>
-              <span>{`${"----".repeat(x.level * 2)}${x.name}`}</span>
-            </List.Item>
-          );
-        })}
-      </List>
-    );
-  }, [result]);
-
   const renderGraph = useCallback(() => {
     return <ResultTree data={result}></ResultTree>;
   }, [result]);
@@ -187,15 +145,17 @@ const SecondHandHouse: React.FC<Props> = (props) => {
       </NavBar>
       {renderFormPart()}
       <CapsuleTabs>
-        <CapsuleTabs.Tab title="数值" key="number">
-          {renderResultPart()}
+        <CapsuleTabs.Tab title="结果" key="number">
+          <ResultList data={result}></ResultList>
         </CapsuleTabs.Tab>
-        <CapsuleTabs.Tab title="图形" key="grape">
+
+        <CapsuleTabs.Tab title="图表" key="grape">
           {renderGraph()}
         </CapsuleTabs.Tab>
-        <CapsuleTabs.Tab title="debug" key="debug">
+
+        {/* <CapsuleTabs.Tab title="debug" key="debug">
           <DebugPanel data={{ input, result }}></DebugPanel>
-        </CapsuleTabs.Tab>
+        </CapsuleTabs.Tab> */}
       </CapsuleTabs>
     </div>
   );
