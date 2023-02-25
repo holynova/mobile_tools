@@ -16,15 +16,13 @@ import Toast from "antd-mobile/es/components/toast";
 // @ts-ignore
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import * as rand from "../common/utils/rand";
+import * as rand from "../../common/utils/rand";
 
-import { convert, convertWithMultiDict, getAllCombinations } from "./main";
-import DebugPanel from "../common/components/DebugPanel";
-import { log } from "../common/utils/debug";
+import { convert, convertWithMultiDict, getAllCombinations } from "../main";
 
-import "./HomePage.scss";
+import "./StringAlchemyPage.scss";
 
-const dictModules = import.meta.glob("../common/dict/*.json");
+const dictModules = import.meta.glob("../../common/dict/*.json");
 export interface DictModel {
   [key: string]: string[];
 }
@@ -51,7 +49,7 @@ const loadChosenDicts = (names: string[]) => {
   return Promise.all(pList);
 };
 
-const HomePage: React.FC<Props> = (props) => {
+const StringAlchemyPage: React.FC<Props> = (props) => {
   // const [loading, setLoading] = useState(false)
   const [input, setInput] = useState(initWord);
   const [output, setOutput] = useState("请输入");
@@ -83,7 +81,7 @@ const HomePage: React.FC<Props> = (props) => {
   }, [convert]);
 
   return (
-    <div className="HomePage">
+    <div className="StringAlchemyPage">
       <div className="main-title">弹幕附魔</div>
       <List
         style={{
@@ -150,4 +148,4 @@ const HomePage: React.FC<Props> = (props) => {
   );
 };
 
-export default HomePage;
+export default StringAlchemyPage;

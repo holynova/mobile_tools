@@ -8,14 +8,20 @@ import {
   mockTreeData2,
 } from "./pages/secondHandHouse/model/mockTreeData";
 
-function App() {
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import routes from "./routes";
+
+interface Props {}
+
+const router = createBrowserRouter(routes);
+
+const App: React.FC<Props> = (props) => {
+  // const [loading, setLoading] = useState(false)r
   return (
     <div className="App">
-      <SecondHandHouse></SecondHandHouse>
-      {/* <HomePage></HomePage>; */}
-      {/* <ResultTree data={mockTreeData2}></ResultTree> */}
+      <RouterProvider router={router} />
     </div>
   );
-}
+};
 
 export default App;

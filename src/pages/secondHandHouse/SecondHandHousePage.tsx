@@ -26,6 +26,7 @@ import { isValidArray } from "../../common/utils";
 import ResultTree from "./components/ResultTree";
 import "./SecondHandHouse.scss";
 import ResultList from "./components/ResultList";
+import { useNavigate, useNavigation } from "react-router-dom";
 // import  {log} from ''
 
 interface Props {}
@@ -137,10 +138,10 @@ const SecondHandHouse: React.FC<Props> = (props) => {
   const renderGraph = useCallback(() => {
     return <ResultTree data={result}></ResultTree>;
   }, [result]);
-
+  const navigate = useNavigate();
   return (
     <div className="SecondHandHouse">
-      <NavBar back="返回" onBack={null}>
+      <NavBar back="返回" onBack={() => navigate("/")}>
         二手房计算
       </NavBar>
       {renderFormPart()}
