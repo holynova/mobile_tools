@@ -36,7 +36,6 @@ interface Data {
 const styles: Record<string, React.CSSProperties> = {
   wrapper: {
     width: "100%",
-    background: "pink",
   },
 };
 

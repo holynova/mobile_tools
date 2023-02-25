@@ -13,6 +13,8 @@ import {
   List,
   Divider,
   CapsuleTabs,
+  NavBar,
+  Checkbox,
 } from "antd-mobile";
 import DebugPanel from "../../common/components/DebugPanel";
 import {
@@ -22,8 +24,7 @@ import {
 } from "./utils/SecondHandHouseCalculator";
 import { isValidArray } from "../../common/utils";
 import ResultTree from "./components/ResultTree";
-import mockTreeData from "./model/mockTreeData";
-// import './SecondHandHouse.less'
+import "./SecondHandHouse.scss";
 // import  {log} from ''
 
 interface Props {}
@@ -43,26 +44,35 @@ const initialValue: Params = {
 };
 
 const formConfig = [
+  { isGroup: true, label: "价格" },
   { name: "totalPrice", label: "总价(万)", defaultValue: 450 },
   {
     name: "tradeCenterVerifiedPrice",
     label: "交易中心评估价(万)",
     defaultValue: 400,
   },
-  { name: "isOverFiveYears", label: "满五年", defaultValue: true },
-  { name: "isSellersOnlyHouse", label: "卖家唯一房屋", defaultValue: false },
-  { name: "agencyFeeRate", label: "中介费费率(%)", defaultValue: 2 },
+  { isGroup: true, label: "房子情况" },
+
   { name: "area", label: "面积(平方米)", defaultValue: 55 },
   { name: "isNormalHouse", label: "普通住宅", defaultValue: false },
+
+  { isGroup: true, label: "卖家相关" },
+
+  { name: "isOverFiveYears", label: "上次交易满五年", defaultValue: true },
+  { name: "isSellersOnlyHouse", label: "卖家唯一房屋", defaultValue: false },
+  { name: "buyPrice", label: "卖家买入价格(万)", defaultValue: 50 },
   {
     name: "isPublicHouseFirstTrade",
     label: "售后公房首次交易",
     defaultValue: true,
   },
-  { name: "buyPrice", label: "卖家买入价格(万)", defaultValue: 50 },
-  { name: "downPaymentPercentage", label: "首付比例(%)", defaultValue: 35 },
+
+  { isGroup: true, label: "买家相关" },
+  { name: "agencyFeeRate", label: "中介费费率(%)", defaultValue: 2 },
+  { name: "downPaymentPercentage", label: "贷款首付比例(%)", defaultValue: 35 },
   { name: "isBuyerOnlyHouse", label: "买家首套住房", defaultValue: true },
 ];
+
 const SecondHandHouse: React.FC<Props> = (props) => {
   const [result, setResult] = useState<PriceNode>();
   const [input, setInput] = useState<Params>();
@@ -77,14 +87,23 @@ const SecondHandHouse: React.FC<Props> = (props) => {
   }, []);
 
   const [myForm] = Form.useForm();
-  const renderInputPart = useCallback(() => {
+
+  const renderFormPart = useCallback(() => {
     return (
       <Form
+        style={{ width: "100%", background: "#eee", padding: "10px 0" }}
         layout="horizontal"
         initialValues={initialValue}
         onValuesChange={onChange}
+        // mode="card"
       >
         {formConfig.map((x) => {
+          if ("isGroup" in x) {
+            if (x.isGroup) {
+              return <Form.Header key={x.label}>{x.label}</Form.Header>;
+            }
+          }
+
           if (x.name.startsWith("is")) {
             return (
               <Form.Item
@@ -93,12 +112,18 @@ const SecondHandHouse: React.FC<Props> = (props) => {
                 key={x.label}
                 valuePropName="checked"
               >
-                <Switch></Switch>
+                <Checkbox></Checkbox>
+                {/* <Switch></Switch> */}
               </Form.Item>
             );
           } else {
             return (
-              <Form.Item name={x.name} label={x.label} key={x.label}>
+              <Form.Item
+                name={x.name}
+                label={x.label}
+                key={x.label}
+                // childElementPosition="right"
+              >
                 <Input type={"number"} placeholder="请输入数字"></Input>
               </Form.Item>
             );
@@ -114,7 +139,7 @@ const SecondHandHouse: React.FC<Props> = (props) => {
     }
     const flat = (input?: PriceNode): Row[] => {
       const res: Row[] = [];
-      const loop = (node?: PriceNode, level?: number) => {
+      const loop = (node: PriceNode, level: number) => {
         if (node) {
           res.push({
             name: node.name,
@@ -157,9 +182,10 @@ const SecondHandHouse: React.FC<Props> = (props) => {
 
   return (
     <div className="SecondHandHouse">
-      <h3>SecondHandHouse</h3>
-      {renderInputPart()}
-      <Divider>结果</Divider>
+      <NavBar back="返回" onBack={null}>
+        二手房计算
+      </NavBar>
+      {renderFormPart()}
       <CapsuleTabs>
         <CapsuleTabs.Tab title="数值" key="number">
           {renderResultPart()}
