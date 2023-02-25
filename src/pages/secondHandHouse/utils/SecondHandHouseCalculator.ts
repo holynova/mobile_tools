@@ -12,12 +12,12 @@ export interface Params {
   downPaymentPercentage: number; // 首付比例
 }
 
-export interface Unit {
+export interface PriceNode {
   name: string;
   base?: number;
   rate?: number;
   result: number;
-  children?: Unit[];
+  children?: PriceNode[];
 }
 export interface Result {
   base: number;
@@ -144,17 +144,17 @@ export class HouseCalculator {
     return { base, rate, result: (base * rate) / 100 };
   }
 
-  autoSum(input: Unit): Unit {
+  autoSum(input: PriceNode): PriceNode {
     const isValidArray = (v: any) => Array.isArray(v) && v.length > 0;
-    const isLeafNode = (x: Unit) => !isValidArray(x?.children);
+    const isLeafNode = (x: PriceNode) => !isValidArray(x?.children);
 
-    const loop = (node: Unit): number => {
+    const loop = (node: PriceNode): number => {
       if (isLeafNode(node)) {
         return node.result;
       }
 
       let sumOfChildren =
-        node.children?.reduce((prev: number, cur: Unit): number => {
+        node.children?.reduce((prev: number, cur: PriceNode): number => {
           return prev + loop(cur);
         }, 0) ?? 0;
       node.result = sumOfChildren;
@@ -172,7 +172,7 @@ export class HouseCalculator {
     // const personalInputTax = this.getPersonalInputTax();
     // const agencyFee = this.getAgencyFee();
 
-    const view1: Unit = {
+    const view1: PriceNode = {
       name: "总金额",
       result: 0,
       children: [
