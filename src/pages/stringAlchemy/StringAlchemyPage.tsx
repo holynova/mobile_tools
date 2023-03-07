@@ -21,6 +21,8 @@ import * as rand from "../../common/utils/rand";
 import { convert, convertWithMultiDict, getAllCombinations } from "../main";
 
 import "./StringAlchemyPage.scss";
+import { NavBar } from "antd-mobile";
+import { useNavigate } from "react-router-dom";
 
 const dictModules = import.meta.glob("../../common/dict/*.json");
 export interface DictModel {
@@ -44,7 +46,7 @@ const options = [
 const loadChosenDicts = (names: string[]) => {
   let pList = names.map((x) => {
     let fullName = `../common/dict/${x}.json`;
-    return dictModules[fullName]();
+    return dictModules[fullName]?.();
   });
   return Promise.all(pList);
 };
@@ -79,10 +81,14 @@ const StringAlchemyPage: React.FC<Props> = (props) => {
   useEffect(() => {
     convert();
   }, [convert]);
+  const navigate = useNavigate();
 
   return (
     <div className="StringAlchemyPage">
-      <div className="main-title">弹幕附魔</div>
+      <NavBar back="返回" onBack={() => navigate("/")}>
+        弹幕附魔
+      </NavBar>
+      {/* <div className="main-title">弹幕附魔</div> */}
       <List
         style={{
           "--prefix-width": "6em",
