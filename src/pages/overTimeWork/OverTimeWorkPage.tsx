@@ -39,7 +39,7 @@ const formConfig: ConfigItem[] = [
   // },
   {
     label: "月薪",
-    defaultValue: 10000,
+    defaultValue: 20000,
     name: "monthSalary",
     isGroup: false,
   },

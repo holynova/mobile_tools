@@ -29,6 +29,7 @@ const OverTimeResult: React.FC<Props> = (props) => {
         <span>本月数据</span>
         <span>标准965</span>
         <span>实际</span>
+        <span>比例</span>
       </div>
       {props.data.map((x) => {
         return (
@@ -36,6 +37,11 @@ const OverTimeResult: React.FC<Props> = (props) => {
             <span>{`${x.label}(${x.unit})`}</span>
             <span>{formatNumber(x.standard)}</span>
             <span>{formatNumber(x.current)}</span>
+            <span>
+              {x.standard === 0
+                ? "-"
+                : formatNumber((x.current / x.standard) * 100, 0) + "%"}
+            </span>
           </div>
         );
       })}

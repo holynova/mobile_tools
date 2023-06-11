@@ -26,6 +26,7 @@ export const calculateOverTimePerWeek = ({
   const workDayHour = hourPerDay * Math.min(Number(workDays), 5);
   const weekEndHour = hourPerDay * range(Number(workDays) - 5, 0, 2);
   return {
+    hourPerDay,
     workDayHour,
     weekEndHour,
     totalHour: workDayHour + weekEndHour,
@@ -46,7 +47,8 @@ export const getResult = (input: IOverTimeInput, setting: IOverTimeSetting) => {
   // const month = {
   //   hour: isBigSmallWeek?
   // }
-  const { monthSalary = 10000, isBigSmallWeek = false } = setting;
+  const { isBigSmallWeek = false } = setting;
+  const monthSalary = Number(setting.monthSalary);
   return [
     {
       label: "时薪",
@@ -63,27 +65,33 @@ export const getResult = (input: IOverTimeInput, setting: IOverTimeSetting) => {
         2 *
         (isBigSmallWeek ? 2 : 4),
       standard: 0,
-      unit: "元",
+      unit: "元/月",
     },
     {
-      label: "周末加班时长",
+      label: "周末加班",
       standard: 0,
       current: current.overTimeWeekEndHour * (isBigSmallWeek ? 2 : 4),
-      unit: "小时",
+      unit: "小时/月",
     },
     {
-      label: "工作日加班时长",
+      label: "工作日加班",
       standard: 0,
       current: current.overTimeWorkDayHour * 4,
-      unit: "小时",
+      unit: "小时/月",
     },
     {
-      label: "工作时间",
+      label: "工作时长",
       standard: standard.totalHour * 4,
       current: isBigSmallWeek
         ? current.totalHour * 2 + current.workDayHour * 2
         : current.totalHour * 4,
-      unit: "小时",
+      unit: "小时/月",
+    },
+    {
+      label: "工作时长",
+      standard: standard.hourPerDay,
+      current: current.hourPerDay,
+      unit: "小时/天",
     },
   ];
 };
