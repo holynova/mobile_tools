@@ -1,0 +1,22 @@
+.OverTimeResult {
+  .row {
+    display: flex;
+    line-height: 2;
+    font-size: 16px;
+    border-bottom: 1px solid #eee;
+    > span {
+      text-align: right;
+      flex: 1;
+      &:first-of-type {
+        text-align: left;
+        flex: 2;
+      }
+    }
+    &.header {
+      font-weight: bold;
+      border: 1px solid black;
+      border-left: none;
+      border-right: none;
+    }
+  }
+}
