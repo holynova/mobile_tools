@@ -26,9 +26,9 @@ const OverTimeResult: React.FC<Props> = (props) => {
   return (
     <div className="OverTimeResult">
       <div className="row header">
-        <span>项目</span>
-        <span>理论值</span>
-        <span>实际值</span>
+        <span>本月数据</span>
+        <span>标准965</span>
+        <span>实际</span>
       </div>
       {props.data.map((x) => {
         return (

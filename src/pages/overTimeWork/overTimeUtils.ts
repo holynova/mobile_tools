@@ -55,30 +55,30 @@ export const getResult = (input: IOverTimeInput, setting: IOverTimeSetting) => {
       unit: "元/小时",
     },
     {
-      label: "本月加班费",
+      label: "应发加班费",
       desc: "周末按2倍工资",
-      standard:
+      current:
         (monthSalary / (standard.totalHour * 4)) *
         current.overTimeWeekEndHour *
         2 *
         (isBigSmallWeek ? 2 : 4),
-      current: 0,
+      standard: 0,
       unit: "元",
     },
     {
-      label: "本月周末加班时长",
+      label: "周末加班时长",
       standard: 0,
       current: current.overTimeWeekEndHour * (isBigSmallWeek ? 2 : 4),
       unit: "小时",
     },
     {
-      label: "本月工作日加班时长",
+      label: "工作日加班时长",
       standard: 0,
       current: current.overTimeWorkDayHour * 4,
       unit: "小时",
     },
     {
-      label: "本月工作时间",
+      label: "工作时间",
       standard: standard.totalHour * 4,
       current: isBigSmallWeek
         ? current.totalHour * 2 + current.workDayHour * 2

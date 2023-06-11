@@ -1,8 +1,12 @@
 .OverTimeResult {
+  * {
+    box-sizing: border-box;
+  }
   .row {
     display: flex;
     line-height: 2;
     font-size: 16px;
+    color: #666;
     border-bottom: 1px solid #eee;
     > span {
       text-align: right;

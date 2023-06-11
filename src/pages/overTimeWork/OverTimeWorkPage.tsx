@@ -12,14 +12,14 @@ import OverTimeResult from "./components/OverTimeResult";
 import MagicHourInput from "./components/MagicHourInput";
 import { isValidArray } from "../../common/utils";
 // import {} from "antd";
-// import './OverTimeWorkPage.less'
+import "./OverTimeWorkPage.scss";
 // import  {log} from ''
 interface Props {}
 
 const formConfig: ConfigItem[] = [
   // {
   //   isGroup: true,
-  //   label: "工作时间",
+  //   label: "设置",
   // },
   // {
   //   label: "上班时间",
@@ -38,15 +38,15 @@ const formConfig: ConfigItem[] = [
   //   isGroup: false,
   // },
   {
-    label: "午休时长(小时)",
-    defaultValue: 1,
-    name: "restTimePerDay",
-    isGroup: false,
-  },
-  {
     label: "月薪",
     defaultValue: 10000,
     name: "monthSalary",
+    isGroup: false,
+  },
+  {
+    label: "午休时长(小时)",
+    defaultValue: 1,
+    name: "restTimePerDay",
     isGroup: false,
   },
   {
@@ -61,7 +61,7 @@ const getInitialValue = (configs: ConfigItem[]) => {
   let res = {};
   configs.forEach((config) => {
     if (config?.name) {
-      res[config.name] = config.defaultValue;
+      res[config?.name] = config.defaultValue;
     }
   });
   return res;
@@ -75,7 +75,7 @@ const OverTimeWorkPage: React.FC<Props> = (props) => {
   useEffect(() => {}, []);
   return (
     <div className="OverTimeWorkPage">
-      <h3>996计算器</h3>
+      {/* <h3>996计算器</h3> */}
       <MagicHourInput
         onChange={(value) => {
           if (isValidArray(value)) {
@@ -99,7 +99,9 @@ const OverTimeWorkPage: React.FC<Props> = (props) => {
           })
         }
       />
-      <OverTimeResult data={getResult(values, values)}></OverTimeResult>
+      <div className="over-time-result">
+        <OverTimeResult data={getResult(values, values)}></OverTimeResult>
+      </div>
     </div>
   );
 };

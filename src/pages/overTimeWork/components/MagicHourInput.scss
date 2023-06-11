@@ -1,9 +1,20 @@
 .MagicHourInput {
+  padding: 12px 16px;
   .main-input {
     font-size: 66px;
-    width: 370px;
-    // border: none;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #eee;
 
     // text-align: center;
+  }
+  .tip {
+    line-height: 2;
+  }
+  .magic-hour-input-radio-part {
+    padding: 12px 0;
+    .magic-hour-input-radio {
+      // line-height: 1;
+    }
   }
 }

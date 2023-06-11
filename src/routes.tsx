@@ -2,7 +2,7 @@ import { RouteObject } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import SecondHandHouse from "./pages/secondHandHouse/SecondHandHousePage";
 import StringAlchemyPage from "./pages/stringAlchemy/StringAlchemyPage";
-import OverTimeWorkPage from "./pages/overTimeWork/OverTimeWork";
+import OverTimeWorkPage from "./pages/overTimeWork/OverTimeWorkPage";
 
 const routes: RouteObject[] = [
   {

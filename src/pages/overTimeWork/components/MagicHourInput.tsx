@@ -81,10 +81,14 @@ const MagicHourInput: React.FC<Props> = (props) => {
           props?.onChange(options[index]);
         }}
       >
-        <Space direction="vertical">
+        <Space direction="vertical" className="magic-hour-input-radio-part">
           {options.map((option, index) => {
             return (
-              <Radio key={option.join(",")} value={index}>
+              <Radio
+                key={option.join(",")}
+                value={index}
+                className="magic-hour-input-radio"
+              >
                 {`上午${option[0]}点上班, 下午${option[1]}点下班, 每周${option[2]}天`}
               </Radio>
             );
@@ -96,11 +100,13 @@ const MagicHourInput: React.FC<Props> = (props) => {
 
   return (
     <div className="MagicHourInput">
+      <div className="tip">请输入你的工作时间, 如 965, 996, 10105, 1095</div>
       <input
         autoFocus
         className="main-input"
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
+        placeholder="请输入"
       />
       {renderRadio()}
     </div>
