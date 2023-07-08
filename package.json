@@ -13,6 +13,9 @@
     "@ant-design/graphs": "^1.4.0",
     "antd-mobile": "^5.28.0",
     "currency.js": "^2.0.4",
+    "font-picker-react": "^3.5.2",
+    "mobx": "^6.9.0",
+    "mobx-react-lite": "^3.4.3",
     "pinyin-pro": "^3.3.1",
     "react": "^17.0.0",
     "react-copy-to-clipboard": "^5.0.4",
@@ -22,10 +25,15 @@
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
     "@vitejs/plugin-react": "^1.0.0",
+    "eslint": "^8.44.0",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "sass": "^1.44.0",
     "typescript": "^4.3.2",
-    "vite": "^2.6.4"
+    "vite": "^2.6.4",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }
