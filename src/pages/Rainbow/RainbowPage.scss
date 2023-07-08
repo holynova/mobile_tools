@@ -1,0 +1,13 @@
+.RainbowPage {
+  .color-group {
+    // height: 20px;
+    display: flex;
+    // flex-wrap: wrap;
+    flex-direction: row;
+    .color-item {
+      flex: 1;
+      // width: 100px;
+      height: 100px;
+    }
+  }
+}
