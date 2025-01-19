@@ -3,8 +3,26 @@ import HomePage from "./pages/home/HomePage";
 import SecondHandHouse from "./pages/secondHandHouse/SecondHandHousePage";
 import StringAlchemyPage from "./pages/stringAlchemy/StringAlchemyPage";
 import OverTimeWorkPage from "./pages/overTimeWork/OverTimeWorkPage";
+import FourKnockChess from "./pages/FourKnockChess/FourKnockChess";
+import CharStackPage from "./pages/CharStack/CharStack";
+import RainbowPage from "./pages/Rainbow/RainbowPags";
 
 const routes: RouteObject[] = [
+  {
+    name: "叠字",
+    path: "/charStack",
+    element: <CharStackPage></CharStackPage>,
+  },
+  {
+    name: "彩虹",
+    path: "/rainbow",
+    element: <RainbowPage></RainbowPage>,
+  },
+  {
+    name: "四顶",
+    path: "/chess",
+    element: <FourKnockChess />,
+  },
   {
     name: "996加班计算器",
     path: "/overtime",

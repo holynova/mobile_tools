@@ -1,0 +1,41 @@
+.Position {
+  position: absolute;
+  // $size: 30px;
+  $borderWidth: 1px;
+  $borderColor: black;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffe;
+  // width: $size * 2;
+  .cell {
+    // width: $size - $borderWidth;
+    // height: $size - $borderWidth;
+    border: 1px solid #ffe;
+  }
+  .status {
+    position: absolute;
+    // left: 50%;
+    // top: 50%;
+    // bottom: 50%;
+    font-size: 40px;
+    left: 30px;
+    top: -15px;
+  }
+
+  .border-right {
+    border-right: $borderWidth solid $borderColor;
+  }
+
+  .border-left {
+    border-left: $borderWidth solid $borderColor;
+  }
+
+  .border-top {
+    border-top: $borderWidth solid $borderColor;
+  }
+
+  .border-bottom {
+    border-bottom: $borderWidth solid $borderColor;
+  }
+}

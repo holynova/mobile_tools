@@ -9,7 +9,7 @@ import React, {
 // import './DebugPanel.less'
 // import  {log} from ''
 interface Props {
-  data: any;
+  data?: any;
 }
 const style = {
   fontSize: "12px",
@@ -18,11 +18,15 @@ const style = {
   maxHeight: "300px",
 };
 
-const DebugPanel: React.FC<Props> = (props) => {
+const DebugPanel: React.FC<React.PropsWithChildren<Props>> = ({
+  data,
+  children,
+}) => {
   // const [loading, setLoading] = useState(false)
+  const value = children || data;
   return (
     <pre style={style} className="DebugPanel">
-      {JSON.stringify(props.data, null, 2)}
+      {typeof value === "string" ? value : JSON.stringify(value, null, 2)}
     </pre>
   );
 };
